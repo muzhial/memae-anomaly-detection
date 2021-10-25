@@ -78,9 +78,9 @@ def vframes2imgs(frames_in, step=1, batch_idx = 0):
             idx_list = range(1, num_frame, step)
             return frames_np[idx_list,:,:]
     elif(len(frames_shape)==5):
-        # for 3D convolution, N x C x F x H x W
+        # for 3D convolution, 1 x 1 x 16 x 512 x 512
         frames_np = frames_np[batch_idx, :, :, :, :]
-        frames_np = np.transpose(frames_np, (1,0,2,3))
+        frames_np = np.transpose(frames_np, (1,0,2,3))  # (16, 1, 512, 512)
         if step==1:
             # all frames
             return frames_np

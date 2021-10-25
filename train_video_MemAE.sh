@@ -1,15 +1,15 @@
 python script_training.py \
     --ModelName MemAE \
     --ModelSetting Conv3DSpar \
-    --Dataset UCSD_P2_256 \
     --MemDim 2000 \
     --EntropyLossWeight 0.0002 \
     --ShrinkThres 0.0025 \
-    --BatchSize 10 \
+    --BatchSize 4 \
     --Seed 1 \
-    --SaveCheckInterval 1 \
+    --SaveCheckInterval 20 \
+    --TextLogInterval 50 \
     --IsTbLog True \
     --IsDeter True \
-    --DataRoot ./datasets/processed/ \
+    --DataRoot /dataset/mz/outside_data/fault_vid \
     --ModelRoot ./results/ \
     --Suffix Non

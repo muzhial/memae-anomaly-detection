@@ -23,7 +23,7 @@ class TestOptions():
                             type=str,
                             default='Conv3DSpar')  # give the layer details later
         parser.add_argument('--Seed', type=int, default=1)
-        parser.add_argument('--Dataset', help='Dataset', type=str, default='UCSD_P2_256')
+        parser.add_argument('--Dataset', help='Dataset', type=str, default='')
         parser.add_argument('--ImgChnNum', help='image channel', type=int, default=1)
         parser.add_argument('--FrameNum', help='frame num for VIDEO clip', type=int, default=16)
         parser.add_argument('--BatchSize', help='BatchSize', type=int, default=1)
