@@ -4,7 +4,7 @@ python script_training.py \
     --MemDim 2000 \
     --EntropyLossWeight 0.0002 \
     --ShrinkThres 0.0025 \
-    --BatchSize 4 \
+    --BatchSize 2 \
     --Seed 1 \
     --SaveCheckInterval 20 \
     --TextLogInterval 50 \

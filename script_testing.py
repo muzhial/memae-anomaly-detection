@@ -31,12 +31,12 @@ img_crop_size = 0
 ######
 model_setting = utils.get_model_setting(opt)
 
-model_setting = 'out1'
+model_setting = 'out2'
 
 ## data path
 data_root = os.path.join(opt.DataRoot, opt.Dataset)
-data_frame_dir = os.path.join(data_root, 'rawframes')
-data_idx_dir = os.path.join(data_root, 'rawframes_idx')
+data_frame_dir = os.path.join(data_root, 'out2_rawframes')
+data_idx_dir = os.path.join(data_root, 'out2_rawframes_idx')
 
 ############ model path
 model_root = opt.ModelRoot
@@ -108,17 +108,17 @@ with torch.no_grad():
         elif (opt.ModelName == 'MemAE'):
             recon_res = model(frames)
             recon_frames = recon_res['output']
-            if show_image:
+            if show_image and batch_idx == 3:
                 unorm_recon_frames = unorm_trans(recon_frames)
                 # ndarray(T, C, H, W)
-                recon_np = utils.vframes2imgs(recon_frames, step=1, batch_idx=0)
+                recon_np = utils.vframes2imgs(unorm_recon_frames, step=1, batch_idx=0)
                 assert len(recon_np.shape) == 4, 'recon_np should be 4-d'
                 recon_np = np.transpose(recon_np, (0, 2, 3, 1))
                 for i in range(recon_np.shape[0]):
                     recon_frame = (recon_np[i] * 255).astype(np.uint8)
                     recon_frame = cv2.cvtColor(recon_frame, cv2.COLOR_GRAY2BGR)
                     # print(recon_frame.dtype, recon_frame.min(), recon_frame[i].max())
-                    cv2.imwrite(f'./results/res_out1/{i}.png', recon_frame)
+                    cv2.imwrite(f'./results/res_out2/f_{i}.png', recon_frame)
 
             r = recon_frames - frames
             r = utils.crop_image(r, img_crop_size)
@@ -132,7 +132,7 @@ with torch.no_grad():
             print('Wrong ModelName.')
     recon_error_list_round = [round(f, 4) for f in recon_error_list]
     print(recon_error_list_round)
-    np.save(os.path.join(te_res_path, 'out1' + '.npy'), recon_error_list)
+    np.save(os.path.join(te_res_path, 'out2' + '.npy'), recon_error_list)
 
 ## evaluation
 # utils.eval_video(data_root, te_res_path, is_show=False)

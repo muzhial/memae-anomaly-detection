@@ -18,11 +18,11 @@ def parse_args():
     parser.add_argument(
         '--src_dir',
         type=str,
-        default='/dataset/mz/outside_data/fault_vid/out1.mp4')
+        default='/dataset/mz/outside_data/fault_vid/out2.mp4')
     parser.add_argument(
         '--out_dir',
         type=str,
-        default='/dataset/mz/outside_data/fault_vid/rawframes')
+        default='/dataset/mz/outside_data/fault_vid/out2_rawframes')
     parser.add_argument(
         '--num_worker',
         type=int,
@@ -56,6 +56,7 @@ def init(lock_):
 
 def extract_frame(*vid_item):
     full_path, out_full_path = vid_item
+    print(full_path, out_full_path)
     run_success = -1
 
     try:
@@ -78,7 +79,8 @@ def extract_frame(*vid_item):
         pbar.close()
 
         run_success = 0
-    except Exception:
+    except Exception as e:
+        print(e)
         run_success = -1
 
     if run_success == 0:
@@ -146,4 +148,4 @@ if __name__ == '__main__':
 
     # extract_frame(args.src_dir, args.out_dir)
 
-    gen_label_index('rawframes', '/dataset/mz/outside_data/fault_vid')
+    gen_label_index('out2_rawframes', '/dataset/mz/outside_data/fault_vid')

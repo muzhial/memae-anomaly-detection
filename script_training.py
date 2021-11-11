@@ -30,7 +30,7 @@ if(opt.IsDeter):
 model_setting = utils.get_model_setting(opt)
 print('Setting: %s' % (model_setting))
 
-model_setting = 'out1'
+model_setting = 'out2'
 
 ############
 batch_size_in = opt.BatchSize
@@ -54,8 +54,8 @@ print('bs=%d, lr=%f, entrloss=%f, shr=%f, memdim=%d' %
 ############
 ## data path
 data_root = os.path.join(opt.DataRoot, opt.Dataset)
-tr_data_frame_dir = os.path.join(data_root, 'rawframes')
-tr_data_idx_dir = os.path.join(data_root, 'rawframes_idx')
+tr_data_frame_dir = os.path.join(data_root, 'out2_rawframes')
+tr_data_idx_dir = os.path.join(data_root, 'out2_rawframes_idx')
 
 # ############ model saving dir path
 saving_root = opt.ModelRoot

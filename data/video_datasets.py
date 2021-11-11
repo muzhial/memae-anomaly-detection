@@ -29,7 +29,7 @@ class VideoDataset(Dataset):
         self.idx_file_list = self.load_idx_file(
             self.idx_root, idx_suffix, self.frame_root)
 
-        self.idx_file_list = self.idx_file_list[:2000]
+        self.idx_file_list = self.idx_file_list[1000:4000]
 
     def load_idx_file(self, idx_root, idx_suffix, frame_root):
         idx_file_list = []
@@ -157,7 +157,7 @@ class VideoDatasetTest(Dataset):
         self.idx_file_list = self.load_idx_file(
             self.idx_root, idx_suffix, self.frame_root)
 
-        frame_start = 2500
+        frame_start = 3000
         frame_end = frame_start + 16
         self.idx_file_list = self.idx_file_list[frame_start:frame_end]
 
@@ -195,10 +195,13 @@ class VideoDatasetTest(Dataset):
         #     dim=1)
 
         frames = []
-        for frame in clip_files:
+        for i, frame in enumerate(clip_files):
             img = cv2.imread(frame, cv2.IMREAD_GRAYSCALE)
             if add_noise and index in noise_frame_list:
-                img[206:216, 206:216] = 0
+                img[306:356, 306:356] = 0
+                if True:
+                    if index == 3:
+                        cv2.imwrite(f'./results/res_out2/noise_{i}.png', img)
             frames.append(self.transform(img))
         frames = torch.stack(frames, dim=1)
 
